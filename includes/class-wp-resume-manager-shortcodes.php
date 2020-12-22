@@ -190,11 +190,6 @@ class WP_Resume_Manager_Shortcodes {
 
 		ob_start();
 
-		if ( ! resume_manager_user_can_browse_resumes() ) {
-			get_job_manager_template_part( 'access-denied', 'browse-resumes', 'wp-job-manager-resumes', RESUME_MANAGER_PLUGIN_DIR . '/templates/' );
-			return ob_get_clean();
-		}
-
 		extract( $atts = shortcode_atts( apply_filters( 'resume_manager_output_resumes_defaults', array(
 			'per_page'                  => get_option( 'resume_manager_per_page' ),
 			'order'                     => 'DESC',

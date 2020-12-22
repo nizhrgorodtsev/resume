@@ -387,6 +387,21 @@ function the_candidate_video( $post = null ) {
 	}
 }
 
+function return_candidate_video( $post = null ) {
+	$video    = get_the_candidate_video( $post );
+	$video    = is_ssl() ? str_replace( 'http:', 'https:', $video ) : $video;
+	$filetype = wp_check_filetype( $video );
+
+	if ( ! empty( $filetype['ext'] ) ) {
+		$video_embed = wp_video_shortcode( array( 'src' => $video ) );
+	} else {
+		$video_embed = wp_oembed_get( $video );
+	}
+
+	if ( $video_embed ) {
+		return '<div class="candidate-video">' . $video_embed . '</div>';
+	}
+}
 /**
  * Get the candidate video URL
  *
